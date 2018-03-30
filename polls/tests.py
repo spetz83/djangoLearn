@@ -74,17 +74,17 @@ class QuestionModelTests(TestCase):
     def test_was_published_recently_with_future_question(self):
         time = timezone.now() + datetime.timedelta(days=30)
         futureQuestion = Question(pub_date=time)
-        self.assertIs(futureQuestion.wasPublishedRecently(), False)
+        self.assertIs(futureQuestion.was_published_recently(), False)
 
 
     def test_was_published_recently_with_old_question(self):
         time = timezone.now() - datetime.timedelta(days=1, seconds=1)
         oldQuestion = Question(pub_date=time)
-        self.assertIs(oldQuestion.wasPublishedRecently(), False)
+        self.assertIs(oldQuestion.was_published_recently(), False)
 
 
     def test_was_published_recently_with_recent_question(self):
         time = timezone.now() - datetime.timedelta(hours=23, minutes=59, seconds=59)
         recentQuestion = Question(pub_date=time)
-        self.assertIs(recentQuestion.wasPublishedRecently(), True)
+        self.assertIs(recentQuestion.was_published_recently(), True)
 
